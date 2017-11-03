@@ -1,9 +1,13 @@
 package com.codeup.blog.springbootblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 
 @Controller
 public class PostsControllers {
@@ -11,14 +15,21 @@ public class PostsControllers {
 
     @GetMapping("/posts")
     @ResponseBody
-    public String posts() {
-        return "posts index page";
+    public String posts(@PathVariable String posts, Model viewmodel)
+    {
+        ArrayList<String> post = new ArrayList<>();
+        post.add("cat");
+        post.add("dog");
+        viewmodel.addAttribute("post", post);
+        viewmodel.addAttribute("posts", posts);
+        return "index";
     }
 
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String single(){
-        return "Individual post";
+    public String single(@PathVariable int id, Model viewmodel){
+        viewmodel.addAttribute("single",id);
+        return "show";
     }
 
     @GetMapping("/posts/create")
