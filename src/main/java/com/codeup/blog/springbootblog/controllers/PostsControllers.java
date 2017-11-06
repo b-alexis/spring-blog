@@ -1,5 +1,7 @@
 package com.codeup.blog.springbootblog.controllers;
 
+import com.codeup.blog.springbootblog.models.PostSvc;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,13 @@ import java.util.ArrayList;
 
 @Controller
 public class PostsControllers {
+    private final PostSvc postSvc;
+
+    @Autowired
+    public PostsControllers(PostSvc postSvc) {
+        this.postSvc = postSvc;
+    }
+
 
 
     @GetMapping("/posts")
@@ -28,6 +37,8 @@ public class PostsControllers {
     @GetMapping("/posts/{id}")
     @ResponseBody
     public String single(@PathVariable int id, Model viewmodel){
+
+
         viewmodel.addAttribute("single",id);
         return "show";
     }
