@@ -1,9 +1,17 @@
 package com.codeup.blog.springbootblog.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Post {
-    private String title;
-    private String body;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false)
+    private String body;
+
 
     public Post(){}
     public Post(long id, String title, String body) {
@@ -11,6 +19,11 @@ public class Post {
         this.title=title;
         this.body =body;
 
+    }
+
+    public Post (String title, String body){
+        this.title=title;
+        this.body=body;
     }
 
     public String getTitle() {
