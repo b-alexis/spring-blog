@@ -1,5 +1,7 @@
 package com.codeup.blog.springbootblog.models;
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,61 +9,72 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+    public User() {
 
-        @Column(nullable = false)
-        private String username;
+    }
 
-        @Column(nullable = false)
-        private String email;
+    public User(User copy) {
+        id = copy.id; // This line is really important things will break without it.
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
 
-        @Column(nullable = false)
-        private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-        private List<Post> posts;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-        public long getId() {
-                return id;
-        }
+    @Column(nullable = false, unique = true)
+    private String email;
 
-        public void setId(long id) {
-                this.id = id;
-        }
+    @Column(nullable = false)
+    private String password;
 
-        public String getUsername() {
-                return username;
-        }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> posts;
 
-        public void setUsername(String username) {
-                this.username = username;
-        }
+    public long getId() {
+        return id;
+    }
 
-        public String getEmail() {
-                return email;
-        }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-        public void setEmail(String email) {
-                this.email = email;
-        }
+    public String getUsername() {
+        return username;
+    }
 
-        public String getPassword() {
-                return password;
-        }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-        public void setPassword(String password) {
-                this.password = password;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public List<Post> getPosts() {
-                return posts;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setPosts(List<Post> posts) {
-                this.posts = posts;
-        }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }
 
 
