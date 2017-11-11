@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: main-header('title')">
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="fragments/header :: header('All posts')">
 </head>
 <body>
 <nav th:include="fragments/navbar :: mainNavbar"></nav>
+
+<!-- contents-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" th:each="post : ${posts}">
+            <h2>
+                <!--<a th:href="${'/posts/' + post.id}" th:text="${post.title}"></a>-->
+                <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a>
+            </h2>
+            <a class="btn btn-sm btn-warning" th:href="@{/posts/{id}/edit(id=${post.id})}">Edit</a>
+            <p th:text="${post.body}"></p>
+        </div>
+    </div>
+</div>
+
 
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
