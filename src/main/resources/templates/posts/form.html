@@ -1,6 +1,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<body>
+<nav th:replace="fragments/navbar :: mainNavbar"></nav>
 <form th:fragment="form">
     <div class="form-group">
         <label for="title">Title</label>
@@ -12,5 +13,5 @@
     </div>
     <input type="submit" class="btn btn-primary btn-block" />
 </form>
-
+</body>
 </html>
