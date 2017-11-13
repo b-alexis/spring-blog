@@ -13,7 +13,7 @@ public class HomeController {
     @ResponseBody
     //2. Create a regular method for your controller action
     public String indexPage() {
-        return "This is the landing page";
+        return "/index";
     }
 
 

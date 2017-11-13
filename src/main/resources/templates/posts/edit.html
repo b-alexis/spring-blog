@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header('View post')"></head>
 <body>
-<nav th:include="fragments/navbar :: mainNavbar"></nav>
+<nav th:replace="fragments/navbar :: mainNavbar"></nav>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h1 class="text-center">Edit This Post</h1>
-       <form th:action="${'/posts/' + post.id + '/edit'}" method="post" th:object="${post}">
-           Title:
-           <input th:field="*{title}" />
-           <br/>
-           Body:
-           <input th:field="*{body}" />
-           <br/>
-           <input type="submit" />
-       </form>
+        <form th:action="${'/posts/' + post.id + '/edit'}" method="post" th:object="${post}"
+              th:include="posts/form :: form">
+            Title:
+            <input th:field="*{title}"/>
+            <br/>
+            Body:
+            <input th:field="*{body}"/>
+            <br/>
+            <input type="submit"/>
+        </form>
 
     </div>
 </div>

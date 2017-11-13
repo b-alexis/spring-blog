@@ -3,13 +3,24 @@
 <head th:replace="fragments/header :: header('view-post')" ></head>
 
 <body>
-<nav th:include="fragments/navbar :: mainNavbar"></nav>
+<nav th:replace="fragments/navbar :: mainNavbar"></nav>
 
 <!-- contents-->
 <div class="container">
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
-    <a th:href="${'/posts/'+ post.user.email +'/edit'}" class=" btn btn-warning">Edit this post</a>
+   Created by: <a th:href="${'/posts/'+ post.user.email +'/edit'}"><span th:text="${post.user.username}"></span></a>
+
+    <!--Buttons for editing & deleting -->
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="${'/posts/' + post.id + '/edit'}" class="btn btn-block btn warning">Edit This Post</a>
+        </div>
+        <form method="post" th:action="${'/posts/' + post.id + '/delete'}" class="col-md-6">
+            <input class="btn btn-block btn-danger" type=" submit" value="Delete This Post" />
+        </form>
+    </div>
+
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 
